@@ -1,0 +1,6 @@
+<p-carousel headerText="Top 10 application" [value]="top10app" numVisible="5">
+    <ng-template let-apkview pTemplate="item">
+        <app-apk-short [viewItem]=apkview></app-apk-short>
+    </ng-template>
+</p-carousel>
+

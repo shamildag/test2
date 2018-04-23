@@ -1,0 +1,47 @@
+<!--<p-growl [(value)]="msgs"></p-growl>-->
+<p-toolbar>
+  <div class="ui-toolbar-group-left">
+    <button pButton type="button" label="Home" icon="fa-home" routerLink="/"></button>
+    <button pButton type="button" label="New App" icon="fa-plus" *ngIf="isDeveloper()"
+            (click)="showUpload()"></button>
+  </div>
+
+  <div class="ui-toolbar-group-right">
+    <span *ngIf="isLogged()">
+    <b > Hello, {{userName}}  </b>
+      <i class="fa fa-bars"></i> </span>
+    <p-splitButton label="Sign Up/In" icon="fa-sign-in" [model]="items" *ngIf="!isLogged()"></p-splitButton>
+    <button pButton type="button" icon="fa-sign-out" *ngIf="isLogged()" (click)="logout()" pTooltip="Logout" ></button>
+  </div>
+</p-toolbar>
+
+<app-top-five></app-top-five>
+<!--<app-categories></app-categories>-->
+<router-outlet></router-outlet>
+
+<p-dialog header="Login" [(visible)]="displayLogin" modal="modal" width="300" [responsive]="true">
+  <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="block-panel">
+    <input id="email" type="email" formControlName="email" placeholder="Email address"
+           required="required" autofocus="">
+    <input type="password" formControlName="password" placeholder="Password" required="required">
+    <button class="btn btn-lg btn-primary btn-block" type="submit"
+    >Login</button>
+    <!--[disabled]="!loginForm.valid" -->
+
+
+  </form>
+</p-dialog>
+
+<p-dialog header="CreateUser" [(visible)]="displayRegister"
+          modal="modal" width="300" [responsive]="true" >
+  <form [formGroup]="registerForm" (ngSubmit)="onRegister()" class="block-panel">
+    <input id="emailRegister" type="email" formControlName="email" placeholder="Email address" autofocus="">
+    <input type="password" formControlName="password" placeholder="Password" required="">
+    <input type="text" formControlName="name" placeholder="Name" required="">
+    <div class="row">
+      <label class="checkbox">
+        <input id="isdeveloper" type="checkbox" value="isdev" formControlName="isdeveloper">Developer</label>
+    </div>
+    <button type="submit" [disabled]="!registerForm.valid" >Register</button>
+  </form>
+</p-dialog>

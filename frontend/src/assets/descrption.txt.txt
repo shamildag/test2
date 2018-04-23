@@ -1,0 +1,4 @@
+name: application name;
+package: package name (the name of zip archive);
+picture_128: 
+picture_512: 

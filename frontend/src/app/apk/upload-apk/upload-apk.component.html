@@ -1,0 +1,51 @@
+<p-growl [(value)]="msgs"></p-growl>
+<form [formGroup]="uploadform" >
+  <p-panel header="New application">
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2">
+          Name :
+        </div>
+        <div class="ui-grid-col-6">
+          <input pInputText type="text" formControlName="app_name" placeholder="Application name"
+                 style="width: 100%"/>
+        </div>
+      </div>
+
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2">
+          Description:
+        </div>
+        <div class="ui-grid-col-6">
+          <textarea pInputTextarea type="text" formControlName="description" style="width:100%" ></textarea>
+        </div>
+      </div>
+
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-2">
+          Category :
+        </div>
+        <div class="ui-grid-col-6">
+          <p-dropdown [options]="categories" formControlName="category" [autoWidth]="false"></p-dropdown>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div class="ui-grid-row">
+        <div class="ui-grid-col-12">
+          <p-fileUpload name="myfile"
+                        url="apk/upload"
+                        (onBeforeSend) = "onBeforeSend($event)"
+                        accept=".zip" maxFileSize="100000000"
+                        [disabled]="!uploadform.valid"
+                        showUploadButton = "!uploadform.valid"
+          >
+            <ng-template let-file pTemplate="file">
+              <div>{{file.name}}</div>
+            </ng-template>
+          </p-fileUpload>
+        </div>
+      </div>
+    </footer>
+  </p-panel>
+</form>
